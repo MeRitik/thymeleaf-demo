@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <meta charset="UTF-8">
+    <title>Employee Directory</title>
+</head>
+<body class="bg-gray-800">
+<!--    <span th:text="${employees}" class="text-lg" />-->
+<h1 class="mb-8 mt-4 text-center text-4xl text-gray-200">Employee Directory</h1>
+<hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+<a th:href="@{/employees/showFormForAdd}" type="button" class="mb-8 ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">Add Employee</a>
+<div class="relative mt-4 mb-[80px]">
+    <table class="m-auto w-4xl text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+            <th scope="col" class="px-6 py-3">
+                First name
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Last
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Email
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Action
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="emp : ${employees}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+            <th th:text="${emp.firstName}" scope="row" class="px-6 py-4 font-medium dark:text-gray-100 whitespace-nowrap">
+            </th>
+
+            <th th:text="${emp.lastName}" scope="row" class="px-6 py-4 font-medium dark:text-gray-50 whitespace-nowrap">
+            </th>
+
+            <th th:text="${emp.email}" scope="row" class="px-6 py-4 font-medium dark:text-gray-50 whitespace-nowrap">
+            </th>
+
+            <th>
+                <a th:href="@{/employees/showFormForUpdate(employeeId=${emp.id})}" type="button" class="mb-8 ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2 focus:outline-none">Update</a>
+
+                <a th:href="@{/employees/delete(employeeId=${emp.id})}" type="button" class="mb-8 ml-4 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2 focus:outline-none" th:onclick="return areYouSure()">Delete</a>
+            </th>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function areYouSure() {
+        return confirm("Are you sure want to delete this employee?")
+    }
+</script>
+
+</body>
+</html>

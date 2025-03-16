@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Employee</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-800">
+
+<h1 class="mb-8 mt-4 text-center text-4xl text-gray-200">Add an Employee</h1>
+<hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+
+<div class="m-auto p-8">
+    <form th:object="${employee}" th:action="@{/employees/save}" th:method="POST" class="w-md border-b-4 border-green-900 mx-auto bg-gray-700 p-8 rounded-lg">
+        <div class="mb-5">
+            <label for="first" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
+            <input th:field="*{firstName}" type="text" id="first" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+             focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="First Name" />
+<!--            <span th:if="${#fields.hasErrors('firstName')}"></span>-->
+        </div>
+
+        <div class="mb-5">
+            <label for="last" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
+            <input th:field="*{lastName}" type="text" id="last" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+            focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Last Name" />
+        </div>
+
+        <div class="mb-5">
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+            <input th:field="*{email}" type="text" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+            focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@email.com"  />
+        </div>
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+         focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Add Employee</button>
+    </form>
+
+    <p class="text-center m-auto mt-4 text-gray-500"><a th:href="@{/employees/list}" class="inline-flex items-center font-medium text-blue-600 hover:underline">
+        Back to employee list
+        <svg class="w-4 h-4 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+        </svg>
+    </a></p>
+
+
+</div>
+
+</body>
+</html>
