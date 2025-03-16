@@ -2,6 +2,7 @@ package com.thymeleaf.cruddemo.controller;
 
 import com.thymeleaf.cruddemo.entity.Employee;
 import com.thymeleaf.cruddemo.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,11 +28,15 @@ public class EmployeeController {
     }
 
     @PostMapping("/save")
-    public String saveEmployeeForm(@ModelAttribute("employee") Employee employee
-                                  , BindingResult result
+    public String saveEmployeeForm(@Valid @ModelAttribute("employee") Employee employee, BindingResult result
     ) {
-        employeeService.save(employee);
-        return "redirect:/employees/list";
+        System.out.println("       " + employee + "         ");
+        if(result.hasErrors()) {
+            return "employees/add-employee";
+        } else {
+            employeeService.save(employee);
+            return "redirect:/employees/list";
+        }
     }
 
     @GetMapping("/showFormForAdd")

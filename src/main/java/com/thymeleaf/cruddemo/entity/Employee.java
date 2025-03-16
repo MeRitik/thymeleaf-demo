@@ -1,6 +1,10 @@
 package com.thymeleaf.cruddemo.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="employee")
@@ -13,11 +17,17 @@ public class Employee {
     private int id;
 
     @Column(name="first_name")
+    @NotBlank(message = "First name is required")
     private String firstName;
 
     @Column(name="last_name")
+    @NotBlank(message = "Last name is required")
     private String lastName;
 
+    @NotBlank(message = "email is required")
+    @NotNull(message = "email can't be null")
+    @Size(min = 3, message = "email must be at least 3 character long")
+    @Email(message = "invalid email format")
     @Column(name="email")
     private String email;
 
